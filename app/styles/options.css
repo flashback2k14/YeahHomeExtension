@@ -1,0 +1,32 @@
+body {
+  height: 55px;
+  margin: 10px;
+  background: #333;
+  color: #fff;
+}
+
+.flexy {
+  display: flex;
+}
+
+/* top to bottom*/
+.flexy_column {
+  flex-direction: column;
+}
+
+/* Left to right */
+.flexy_row {
+  flex-direction: row;
+}
+
+.flexy_align-c {
+  align-self: center;
+}
+
+.flexy_margin-5 {
+  margin: 5px;
+}
+
+.flexy_basis-35p {
+  flex-basis: 35%;
+}
