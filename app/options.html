@@ -2,31 +2,32 @@
 <html>
   <head>
     <title>Yeah! Home Extension Options Page</title>
+    <link rel="stylesheet" href="./styles/flexy.css">
     <link rel="stylesheet" href="./styles/options.css">
   </head>
   <body>
 
     <div class="flexy flexy_column">
       <div class="flexy flexy_row flexy_margin-5">
-        <div class="flexy flexy_column flexy_basis-35p flexy_align-c">
+        <div class="flexy flexy_column flexy_basis-25p flexy_align-c">
           <label for="selectIcon">Choose Extension Icon</label>
         </div>
         <div class="flexy flexy_column flexy_align-c">
-          <select name="icon" id="selectIcon">
-            <option value="white">White</option>
-            <option value="black">Black</option>
+          <select name="icon" id="selectIcon" class="slct">
+            <option value="white" class="opt">White</option>
+            <option value="black" class="opt">Black</option>
           </select>
         </div>
       </div>
 
       <div class="flexy flexy_row flexy_margin-5">
-        <div class="flexy flexy_column flexy_basis-35p flexy_align-c">
+        <div class="flexy flexy_column flexy_basis-25p flexy_align-c">
           <label for="txtUrl">Choose Opening URL</label>
         </div>
         <div class="flexy flexy_row flexy_align-c">
-          <input id="txtUrl" type="text" placeholder="https://www.google.com">
-          <button id="btnSend">Save</button>
-          <button id="btnClear">Clear</button>
+          <input id="txtUrl" class="txt" type="text" placeholder="https://www.google.com">
+          <button id="btnSend" class="btn btn_save">Save</button>
+          <button id="btnClear" class="btn btn_clear">Clear</button>
         </div>
       </div>
     </div>

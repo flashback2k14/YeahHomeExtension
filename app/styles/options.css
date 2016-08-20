@@ -1,32 +1,88 @@
 body {
   height: 55px;
+  width: 550px;
   margin: 10px;
-  background: #333;
-  color: #fff;
+  background: #263238;
+  color: #E0E0E0;
 }
 
-.flexy {
-  display: flex;
+.slct {
+  width: 60px;
+  background: #263238;
+  background-image: url(../images/arrow_down_white_18dp_2x.png);
+  background-size: 15px;
+  background-position: right;
+  background-repeat: no-repeat;
+  color: #E0E0E0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: #607D8B 1px solid;
 }
 
-/* top to bottom*/
-.flexy_column {
-  flex-direction: column;
+.slct:focus {
+  outline-width: 0;
+  border-bottom: #90A4AE 1px solid;
 }
 
-/* Left to right */
-.flexy_row {
-  flex-direction: row;
+.opt {
+  width: 60px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #263238;
+  color: #E0E0E0;
 }
 
-.flexy_align-c {
-  align-self: center;
+.opt:focus,
+.opt:checked {
+  background: #00B0FF;
+  color: #222222;
 }
 
-.flexy_margin-5 {
-  margin: 5px;
+.txt {
+  width: 200px;
+  background: #263238;
+  color: #E0E0E0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-bottom: #607D8B 1px solid;
 }
 
-.flexy_basis-35p {
-  flex-basis: 35%;
+.txt:focus {
+  outline-width: 0;
+  border-bottom: #90A4AE 1px solid;
+}
+
+.btn {
+  width: 80px;
+  margin-left: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.btn_save {
+  background: #1DE9B6;
+  color: #222222;
+}
+
+.btn_save:hover {
+  background: #64FFDA;
+}
+
+.btn_clear {
+  background: #FF1744;
+  color: #222222;
+}
+
+.btn_clear:hover {
+  background: #FF5252;
 }
