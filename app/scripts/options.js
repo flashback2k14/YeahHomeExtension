@@ -123,7 +123,6 @@ window.addEventListener("DOMContentLoaded", function () {
   var txtMoreUrlName = document.querySelector("#txtMoreUrlName");
   var txtMoreUrl = document.querySelector("#txtMoreUrl");
   var btnAdd = document.querySelector("#btnAdd");
-  // var pNoItems = document.querySelector("#pNoItems");
   var ulMoreUrls = document.querySelector("#ulMoreUrls");
   // register EventListener
   btnAdd.addEventListener("click", function () {
