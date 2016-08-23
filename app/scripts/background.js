@@ -1,14 +1,19 @@
 (function () {
 
-  // function _createMenuItems () {
-  //   for (var i = 0; i < 3; i++) {
-  //     chrome.contextMenus.create({
-  //       id: "yeah-home-menu-item-" + i,
-  //       contexts: ["browser_action"],
-  //       title: "TEST - click me!" + i
-  //     }); 
-  //   }
-  // }
+  function _createMenuItems () {
+    StorageUtil.get(null)
+      .then(function (response) {
+        var moreUrls = Utils.extractMoreUrls(response.items);
+        if (moreUrls) {
+          moreUrls.forEach(function (item) {
+            Utils.createContextMenu(item);
+          });
+        }
+      })
+      .catch(function (error) {
+        console.error(error.message);
+      });
+  }
 
   chrome.browserAction.onClicked.addListener(function (tab) {
     StorageUtil.get(["openingUrl"])
@@ -25,9 +30,9 @@
   });
 
   chrome.contextMenus.onClicked.addListener(function (info, tab) {
-    console.log(info.menuItemId);
+    chrome.tabs.create({url: info.menuItemId});
   });
 
-  // _createMenuItems();
-
+  chrome.runtime.onInstalled.addListener(_createMenuItems);
+  
 })();

@@ -1,5 +1,5 @@
 body {
-  height: 55px;
+  height: 150px;
   width: 550px;
   margin: 10px;
   background: #263238;
@@ -43,7 +43,6 @@ body {
 }
 
 .txt {
-  width: 200px;
   background: #263238;
   color: #E0E0E0;
   -webkit-appearance: none;
@@ -51,6 +50,18 @@ body {
   appearance: none;
   border: none;
   border-bottom: #607D8B 1px solid;
+}
+
+.txt-width-long {
+  width: 200px;
+}
+
+.txt-width-small {
+  width: 78px;
+}
+
+.txt-margin-l-10 {
+  margin-left: 10px;
 }
 
 .txt:focus {
@@ -85,4 +96,17 @@ body {
 
 .btn_clear:hover {
   background: #FF5252;
+}
+
+.lst {
+  margin-left: 15px;
+  padding: 0;
+}
+
+.li-mod {
+  padding: 3px;
+}
+
+.li-mod:hover {
+  background: #607D8B;
 }

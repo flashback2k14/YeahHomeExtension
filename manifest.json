@@ -1,7 +1,7 @@
 {
   "name": "Yeah! Home Extension - DEV",
   "description": "This extension allows you to go to https://www.google.com.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "manifest_version": 2,
   "browser_action": {
     "default_icon": "app/images/ic_home_white_48dp_2x.png",
@@ -9,8 +9,9 @@
   },
   "background": {
     "scripts": [
-      "app/scripts/background.js", 
-      "app/scripts/storage-util.js"
+      "app/scripts/storage-util.js",
+      "app/scripts/utils.js",
+      "app/scripts/background.js"
     ],
     "persistent": false
   },

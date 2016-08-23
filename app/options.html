@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="./styles/options.css">
   </head>
   <body>
-
+    <!-- content -->
     <div class="flexy flexy_column">
+      <!-- icon -->
       <div class="flexy flexy_row flexy_margin-5">
         <div class="flexy flexy_column flexy_basis-25p flexy_align-c">
           <label for="selectIcon">Choose Extension Icon</label>
@@ -19,19 +20,41 @@
           </select>
         </div>
       </div>
-
+      <!-- opening url -->
       <div class="flexy flexy_row flexy_margin-5">
         <div class="flexy flexy_column flexy_basis-25p flexy_align-c">
           <label for="txtUrl">Choose Opening URL</label>
         </div>
         <div class="flexy flexy_row flexy_align-c">
-          <input id="txtUrl" class="txt" type="text" placeholder="https://www.google.com">
-          <button id="btnSend" class="btn btn_save">Save</button>
-          <button id="btnClear" class="btn btn_clear">Clear</button>
+          <input id="txtUrl" class="txt txt-width-long" type="text" placeholder="https://www.google.com">
+          <button id="btnSend" class="btn btn_save">SAVE</button>
+          <button id="btnClear" class="btn btn_clear">CLEAR</button>
+        </div>
+      </div>
+      <!-- more urls -->
+      <div class="flexy flexy_row flexy_margin-5">
+        <div class="flexy flexy_column flexy_basis-25p flexy_align-c">
+          <label for="txtMoreUrlName">Add more URLs</label>
+        </div>
+        <div class="flexy flexy_row flexy_align-c">
+          <input id="txtMoreUrlName" class="txt txt-width-small" type="text" placeholder="Add Name">
+          <input id="txtMoreUrl" class="txt txt-width-long txt-margin-l-10" type="text" placeholder="Add URL">
+          <button id="btnAdd" class="btn btn_save">ADD</button>
+        </div>
+      </div>
+      <!-- more urls list -->
+      <div class="flexy flexy_row flexy_margin-5">
+        <div class="flexy flexy_column flexy_basis-25p flexy_align-c">
+        </div>
+        <div class="flexy flexy_row flexy_align-l">
+          <!--<p id="pNoItems">no items available</p>-->
+          <ul id="ulMoreUrls" class="lst">
+          </ul>
         </div>
       </div>
     </div>
-    
+    <!-- scripts -->
+    <script src="./scripts/utils.js"></script>
     <script src="./scripts/storage-util.js"></script>
     <script src="./scripts/options.js"></script>
   </body>

@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-  StorageUtil.get(["extensionIcon", "openingUrl"])
+  StorageUtil.get(null)
     .then(function (response) {
       // check if items available
       if (Object.keys(response.items).length !== 0) {
@@ -24,6 +24,14 @@ window.addEventListener("load", function () {
           // set opening url
           document.querySelector("#txtUrl").value = response.items.openingUrl;
         }
+
+        var moreUrls = Utils.extractMoreUrls(response.items);
+        if (moreUrls) {
+          var ulMoreUrls = document.querySelector("#ulMoreUrls");
+          moreUrls.forEach(function (item) {
+            ulMoreUrls.appendChild(Utils.createListitem(item[0], item[1]));
+          });
+        }
       } else {
         console.log("no items found!");
       }
@@ -34,6 +42,9 @@ window.addEventListener("load", function () {
 });
 
 window.addEventListener("DOMContentLoaded", function () {
+  /**
+   * ICONS
+   */
   // get extension icon from HTML
   var selectIcon = document.querySelector("#selectIcon");
   // register EventListener
@@ -68,22 +79,27 @@ window.addEventListener("DOMContentLoaded", function () {
         break;
     }
   });
+  /**
+   * OPENING URL
+   */
   // get opening url and button from HTML
   var txtUrl = document.querySelector("#txtUrl");
   var btnSend = document.querySelector("#btnSend");
   // register EventListener
   btnSend.addEventListener("click", function () {
     // check if txtUrl is not empty
-    if (txtUrl.value.length > 0) {
-      // set opening url
-      StorageUtil.save({openingUrl: txtUrl.value})
-        .then(function (response) {
-          console.log(response.message);
-        })
-        .catch(function (error) {
-          console.error(error.message);
-        });
+    if (txtUrl.value.length === 0) {
+      console.log("ToDo: add Notification");
+      return;
     }
+    // set opening url
+    StorageUtil.save({openingUrl: txtUrl.value})
+      .then(function (response) {
+        console.log(response.message);
+      })
+      .catch(function (error) {
+        console.error(error.message);
+      });
   });
   // get button from HTML and reset opening url
   var btnClear = document.querySelector("#btnClear");
@@ -99,5 +115,55 @@ window.addEventListener("DOMContentLoaded", function () {
       .catch(function (error) {
         console.error(error.message);
       });
-  })
+  });
+  /**
+   * MORE URLS
+   */
+  // get HTML Elements
+  var txtMoreUrlName = document.querySelector("#txtMoreUrlName");
+  var txtMoreUrl = document.querySelector("#txtMoreUrl");
+  var btnAdd = document.querySelector("#btnAdd");
+  // var pNoItems = document.querySelector("#pNoItems");
+  var ulMoreUrls = document.querySelector("#ulMoreUrls");
+  // register EventListener
+  btnAdd.addEventListener("click", function () {
+    var mName = txtMoreUrlName.value;
+    var mUrl = txtMoreUrl.value;
+    
+    if (mName.length === 0) {
+      console.log("ToDo: add Notification");
+      return;
+    }
+    if (mUrl.length === 0) {
+      console.log("ToDo: add Notification");
+      return;
+    }
+
+    var item = {};
+    item["mu-" + mName] = [mName, mUrl];
+
+    StorageUtil.save(item)
+      .then(function (response) {
+        console.log(response.message);
+        ulMoreUrls.appendChild(Utils.createListitem(mName, mUrl));
+        Utils.createContextMenu([mName, mUrl]);
+        txtMoreUrlName.value = "";
+        txtMoreUrl.value = "";
+      })
+      .catch(function (error) {
+        console.error(error.message);
+      });
+  });
+  // register EventListener
+  ulMoreUrls.addEventListener("click", function (e) {
+    StorageUtil.remove(Utils.createRemoveKey(e.target))
+      .then(function (response) {
+        console.log(response.message);
+        Utils.removeListitem(ulMoreUrls, e.target.value);
+        Utils.removeContextMenu(Utils.createRemoveId(e.target));
+      }.bind(this))
+      .catch(function (error) {
+        console.error(error.message);
+      });
+  });
 });

@@ -16,6 +16,10 @@
   align-self: center;
 }
 
+.flexy_align-l {
+  align-self: flex-start;
+}
+
 .flexy_margin-5 {
   margin: 5px;
 }
