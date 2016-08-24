@@ -1,7 +1,7 @@
 var StorageUtil = (function () {
   /**
    * Save Items to sync between Chrome Browsers 
-   * @param items [Object] - items to save {key, value}
+   * @param items [Object] - items to save {key: value}
    * @returns Promise
    */
   var save = function (items) {
