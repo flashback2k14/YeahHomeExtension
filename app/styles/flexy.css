@@ -1,0 +1,29 @@
+.flexy {
+  display: flex;
+}
+
+/* top to bottom*/
+.flexy_column {
+  flex-direction: column;
+}
+
+/* Left to right */
+.flexy_row {
+  flex-direction: row;
+}
+
+.flexy_align-c {
+  align-self: center;
+}
+
+.flexy_align-l {
+  align-self: flex-start;
+}
+
+.flexy_margin-5 {
+  margin: 5px;
+}
+
+.flexy_basis-25p {
+  flex-basis: 25%;
+}
