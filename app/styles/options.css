@@ -118,7 +118,7 @@ body {
   max-height: 100px;
   width: 400px;
   padding: 0;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .li-mod {

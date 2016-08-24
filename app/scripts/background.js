@@ -1,5 +1,8 @@
 (function () {
 
+  /**
+   * Helper function to create context menu items
+   */
   function _createMenuItems () {
     StorageUtil.get(null)
       .then(function (response) {
@@ -15,6 +18,9 @@
       });
   }
 
+  /**
+   * Listener for extension icon was clicked
+   */
   chrome.browserAction.onClicked.addListener(function (tab) {
     StorageUtil.get(["openingUrl"])
       .then(function (response) {
@@ -29,10 +35,23 @@
       });
   });
 
+  /**
+   * Listener for context menu item was clicked 
+   */
   chrome.contextMenus.onClicked.addListener(function (info, tab) {
     chrome.tabs.create({url: info.menuItemId});
   });
 
+  /**
+   * Fired when a profile that has this extension installed first starts up
+   */
+  chrome.runtime.onStartup.addListener(_createMenuItems);
+
+  /**
+   * Fired when the extension is first installed, 
+   * when the extension is updated to a new version, 
+   * and when Chrome is updated to a new version
+   */
   chrome.runtime.onInstalled.addListener(_createMenuItems);
   
 })();
