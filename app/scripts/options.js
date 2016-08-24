@@ -33,15 +33,19 @@ window.addEventListener("load", function () {
           });
         }
       } else {
-        console.log("no items found!");
+        Utils.showInfotext(document.querySelector("#pInfoText"), "no items found!", true);
       }
     })
     .catch(function (error) {
-      console.error(error.message);
+      Utils.showInfotext(document.querySelector("#pInfoText"), error.message, false);
     });
 });
 
 window.addEventListener("DOMContentLoaded", function () {
+  /**
+   * INFO TEXT
+   */
+  var pInfoText = document.querySelector("#pInfoText");
   /**
    * ICONS
    */
@@ -57,10 +61,10 @@ window.addEventListener("DOMContentLoaded", function () {
         // save
         StorageUtil.save({extensionIcon: "white"})
           .then(function (response) {
-            console.log(response.message);
+            Utils.showInfotext(pInfoText, response.message, true);
           })
           .catch(function (error) {
-            console.error(error.message);
+            Utils.showInfotext(pInfoText, error.message, false);
           });
         break;
       case "black":
@@ -69,10 +73,10 @@ window.addEventListener("DOMContentLoaded", function () {
         // save
         StorageUtil.save({extensionIcon: "black"})
           .then(function (response) {
-            console.log(response.message);
+            Utils.showInfotext(pInfoText, response.message, true);
           })
           .catch(function (error) {
-            console.error(error.message);
+            Utils.showInfotext(pInfoText, error.message, false);
           });
         break;
       default:
@@ -89,16 +93,16 @@ window.addEventListener("DOMContentLoaded", function () {
   btnSend.addEventListener("click", function () {
     // check if txtUrl is not empty
     if (txtUrl.value.length === 0) {
-      console.log("ToDo: add Notification");
+      Utils.showInfotext(pInfoText, "Invalid Input!", false);
       return;
     }
     // set opening url
     StorageUtil.save({openingUrl: txtUrl.value})
       .then(function (response) {
-        console.log(response.message);
+        Utils.showInfotext(pInfoText, response.message, true);
       })
       .catch(function (error) {
-        console.error(error.message);
+        Utils.showInfotext(pInfoText, error.message, false);
       });
   });
   // get button from HTML and reset opening url
@@ -110,10 +114,10 @@ window.addEventListener("DOMContentLoaded", function () {
     // delete opening url
     StorageUtil.remove("openingUrl")
       .then(function (response) {
-        console.log(response.message);
+        Utils.showInfotext(pInfoText, response.message, true);
       })
       .catch(function (error) {
-        console.error(error.message);
+        Utils.showInfotext(pInfoText, error.message, false);
       });
   });
   /**
@@ -130,11 +134,11 @@ window.addEventListener("DOMContentLoaded", function () {
     var mUrl = txtMoreUrl.value;
     
     if (mName.length === 0) {
-      console.log("ToDo: add Notification");
+      Utils.showInfotext(pInfoText, "Invalid value - Name!", false);
       return;
     }
     if (mUrl.length === 0) {
-      console.log("ToDo: add Notification");
+      Utils.showInfotext(pInfoText, "Invalid valie - URL!", false);
       return;
     }
 
@@ -143,26 +147,26 @@ window.addEventListener("DOMContentLoaded", function () {
 
     StorageUtil.save(item)
       .then(function (response) {
-        console.log(response.message);
+        Utils.showInfotext(pInfoText, response.message, true);
         ulMoreUrls.appendChild(Utils.createListitem(mName, mUrl));
         Utils.createContextMenu([mName, mUrl]);
         txtMoreUrlName.value = "";
         txtMoreUrl.value = "";
       })
       .catch(function (error) {
-        console.error(error.message);
+        Utils.showInfotext(pInfoText, error.message, false);
       });
   });
   // register EventListener
-  ulMoreUrls.addEventListener("click", function (e) {
+  ulMoreUrls.addEventListener("dblclick", function (e) {
     StorageUtil.remove(Utils.createRemoveKey(e.target))
       .then(function (response) {
-        console.log(response.message);
-        Utils.removeListitem(ulMoreUrls, e.target.value);
+        Utils.showInfotext(pInfoText, response.message, true);
+        Utils.removeListitem(ulMoreUrls, e.target);
         Utils.removeContextMenu(Utils.createRemoveId(e.target));
       }.bind(this))
       .catch(function (error) {
-        console.error(error.message);
+        Utils.showInfotext(pInfoText, error.message, false);
       });
   });
 });

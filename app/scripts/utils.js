@@ -36,14 +36,33 @@ var Utils = (function () {
     return value;
   };
 
-  var removeListitem = function (list, index) {
-    list.removeChild(list.childNodes[index + 1]);
+  var removeListitem = function (list, removeItem) {
+    var items = list.childNodes;
+    items.forEach(function (item) {
+      if (item === removeItem) {
+        list.removeChild(removeItem);
+      }
+    });
   };
 
   var removeContextMenu = function (id) {
     chrome.contextMenus.remove(id, function () {
       console.log("successfully removed context menu item!");
     })
+  };
+
+  var showInfotext = function (el, text, isSuccess) {
+    el.innerHTML = text;
+    if (isSuccess) {
+      el.classList.remove("info-success", "info-error");
+      el.classList.add("info-success");
+    } else {
+      el.classList.remove("info-success", "info-error");
+      el.classList.add("info-error");
+    }
+    setTimeout(function () {
+      el.innerHTML = ""
+    }, 2000);
   };
 
   return {
@@ -53,6 +72,7 @@ var Utils = (function () {
     createContextMenu: createContextMenu,
     extractMoreUrls: extractMoreUrls,
     removeListitem: removeListitem,
-    removeContextMenu: removeContextMenu
+    removeContextMenu: removeContextMenu,
+    showInfotext: showInfotext
   };
 })();
