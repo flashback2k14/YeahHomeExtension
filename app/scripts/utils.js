@@ -1,35 +1,43 @@
 var Utils = (function () {
-
   var createListitem = function (name, url) {
-    var li = document.createElement("li");
-    li.classList.add("li-mod");
-    li.innerHTML = name + " - " + url;
+    var li = document.createElement('li');
+    li.classList.add('li-mod');
+    li.innerHTML = name + ' - ' + url;
     return li;
   };
 
   var createRemoveKey = function (li) {
-    var removeItem = li.innerText.split("-");
-    var removeKey = "mu-" + removeItem[0];
+    var removeItem = li.innerText.split('-');
+    var removeKey = 'mu-' + removeItem[0];
     return removeKey.trim();
   };
 
   var createRemoveId = function (li) {
-    var removeItem = li.innerText.split("-");
+    var removeItem = li.innerText.split('-');
     return removeItem[1].trim();
+  };
+
+  var createParentContextMenu = function () {
+    chrome.contextMenus.create({
+      id: 'more',
+      contexts: ['browser_action'],
+      title: 'More links',
+    });
   };
 
   var createContextMenu = function (item) {
     chrome.contextMenus.create({
+      parentId: 'more',
       id: item[1],
-      contexts: ["browser_action"],
-      title: item[0] + " - " + item[1]
+      contexts: ['browser_action'],
+      title: item[0] + ' - ' + item[1],
     });
   };
 
   var extractMoreUrls = function (items) {
     var value = [];
     for (var item in items) {
-      if (item.indexOf("mu-") !== -1) {
+      if (item.indexOf('mu-') !== -1) {
         value.unshift(items[item]);
       }
     }
@@ -47,21 +55,21 @@ var Utils = (function () {
 
   var removeContextMenu = function (id) {
     chrome.contextMenus.remove(id, function () {
-      console.log("successfully removed context menu item!");
-    })
+      console.log('successfully removed context menu item!');
+    });
   };
 
   var showInfotext = function (el, text, isSuccess) {
     el.innerHTML = text;
     if (isSuccess) {
-      el.classList.remove("info-success", "info-error");
-      el.classList.add("info-success");
+      el.classList.remove('info-success', 'info-error');
+      el.classList.add('info-success');
     } else {
-      el.classList.remove("info-success", "info-error");
-      el.classList.add("info-error");
+      el.classList.remove('info-success', 'info-error');
+      el.classList.add('info-error');
     }
     setTimeout(function () {
-      el.innerHTML = ""
+      el.innerHTML = '';
     }, 2000);
   };
 
@@ -69,10 +77,11 @@ var Utils = (function () {
     createListitem: createListitem,
     createRemoveKey: createRemoveKey,
     createRemoveId: createRemoveId,
+    createParentContextMenu: createParentContextMenu,
     createContextMenu: createContextMenu,
     extractMoreUrls: extractMoreUrls,
     removeListitem: removeListitem,
     removeContextMenu: removeContextMenu,
-    showInfotext: showInfotext
+    showInfotext: showInfotext,
   };
 })();
